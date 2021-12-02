@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<odoo>
+        <record id="create_report_form" model="ir.ui.view">
+            <field name="name">report.form</field>
+            <field name="model">report.trans</field>
+            <field name="arch" type="xml">
+                <form string="crete report">
+                    <footer>
+                        <button name="create_xlsx_monthly" string="Report" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="rp_action" model="ir.actions.act_window">
+            <field name="name">report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">report.trans</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="create_report_form"/>
+            <field name="target">new</field>
+        </record>
+</odoo>

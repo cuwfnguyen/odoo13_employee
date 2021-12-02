@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record model="ir.actions.report" id='partner_xlsx'>
+        <field name="name">Timekeeping excel</field>
+        <field name="model">report.trans</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">depends_hr.report_monthly</field>
+        <field name="report_file">depends_hr.report_monthly</field>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record model="ir.module.category" id="module_category_staff">
+        <field name="description">Helps you manage your employee.</field>
+        <field name="sequence">10</field>
+        <field name = 'name'> Position </field>
+    </record>
+
+    <record id = "user" model="res.groups">
+        <field name="name"> Staff </field>
+        <field name="category_id" ref="module_category_staff" />
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id = "manager" model="res.groups">
+        <field name="name"> Manager </field>
+        <field name="category_id" ref="module_category_staff" />
+        <field name="implied_ids" eval="[(4, ref('user'))]"/>
+    </record>
+
+    <record id = "super_manager" model="res.groups">
+        <field name="name"> Director </field>
+        <field name="category_id" ref="module_category_staff" />
+        <field name="implied_ids" eval="[(4, ref('manager'))]"/>
+    </record>
+
+    <record id = "president" model="res.groups">
+        <field name="name"> President </field>
+        <field name="category_id" ref="module_category_staff" />
+        <field name="implied_ids" eval="[(4, ref('super_manager'))]"/>
+    </record>
+
+    <record id="base.default_user" model="res.users">
+        <field name="groups_id" eval="[(4,ref('user'))]"/>
+    </record>
+
+    <record id="user_record_rule" model="ir.rule">
+        <field name="name">staff record rule</field>
+        <field name="model_id" ref="model_hr_employee"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('user'))]"/>
+    </record>
+
+    <record id="manager_record_rule" model="ir.rule">
+        <field name="name">manager record rule</field>
+        <field name="model_id" ref="model_hr_employee"/>
+        <field name="domain_force"> [('department_id', 'child_of', user.department_id.id)]</field>
+        <field name="groups" eval="[(4, ref('manager'))]"/>
+    </record>
+
+
+    <record id="super_manager_record_rule" model="ir.rule">
+        <field name="name">director record rule</field>
+        <field name="model_id" ref="model_hr_employee"/>
+        <field name="domain_force">  [('department_id', 'child_of', user.department_id.id)]</field>
+        <field name="groups" eval="[(4, ref('super_manager'))]"/>
+    </record>
+
+    <record id="president_record_rule" model="ir.rule">
+        <field name="name">president record rule</field>
+        <field name="model_id" ref="model_hr_employee"/>
+        <field name="domain_force">[('department_id', 'child_of', user.department_id.id)]</field>
+        <field name="groups" eval="[(4, ref('president'))]"/>
+    </record>
+
+     <record id="user_timekeeping" model="ir.rule">
+        <field name="name">user rule timekeeping</field>
+        <field name="model_id" ref="model_check_time"/>
+        <field name="domain_force">[('employ_id.user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('user'))]"/>
+    </record>
+
+    <record id="manager_timekeeping" model="ir.rule">
+        <field name="name">manager rule timekeeping</field>
+        <field name="model_id" ref="model_check_time"/>
+        <field name="domain_force"> [('employ_id.department_id', 'child_of', user.department_id.id)]</field>
+        <field name="groups" eval="[(4, ref('manager'))]"/>
+    </record>
+
+
+    <record id="director_timekeeping" model="ir.rule">
+        <field name="name">director rule timekeeping</field>
+        <field name="model_id" ref="model_check_time"/>
+        <field name="domain_force">[('employ_id.department_id', 'child_of', user.department_id.id)]</field>
+        <field name="groups" eval="[(4, ref('super_manager'))]"/>
+    </record>
+
+    <record id="president_timekeeping" model="ir.rule">
+        <field name="name">president rule timekeeping</field>
+        <field name="model_id" ref="model_check_time"/>
+        <field name="domain_force">[('employ_id.department_id', 'child_of', user.department_id.id)]</field>
+        <field name="groups" eval="[(4, ref('president'))]"/>
+    </record>
+
+</odoo>
+

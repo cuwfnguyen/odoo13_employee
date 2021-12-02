@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="check_tree" model="ir.ui.view">
+              <field name="name">check.tree</field>
+              <field name="model">check.time</field>
+              <field name="arch" type="xml">
+               <tree>
+                   <field name="employ_id"/>
+                   <field name="check_in"/>
+                   <field name="check_out"/>
+                   <field name ='timekeeping'/>
+               </tree>
+              </field>
+    </record>
+
+    <record id="repair_tree" model="ir.ui.view">
+              <field name="name">repair.tree</field>
+              <field name="model">repair.repair</field>
+              <field name="arch" type="xml">
+               <tree>
+                   <field name="id_repair"/>
+                   <field name="status"/>
+               </tree>
+              </field>
+    </record>
+
+    <record id="repair_form" model="ir.ui.view">
+              <field name="name">repair.form</field>
+              <field name="model">repair.repair</field>
+              <field name="arch" type="xml">
+               <form string ="create repair">
+                   <header>
+                       <button name="cancel_repair" string="Cancel" type="object" class="btn-primary"/>
+                       <button name="approval_repair" class="oe_highlight"
+                        string="Approve" type="object" groups="depends_hr.manager, depends_hr.super_manager, depends_hr.president"
+                        attrs="{'invisible': ['|',('button_clicked', '=', True),('current_usr', '=', True)]}"/>
+                   </header>
+                   <sheet>
+                       <notebook>
+                           <page string="Information">
+                               <group>
+                                   <field name="id_repair"/>
+                                   <field name="date_repair"/>
+                                   <field name="description" placeholder="Add an internal note..." height="50"/>
+                               </group>
+                           </page>
+
+                           <page string="Approvals">
+                               <group>
+                                   <field name="status"/>
+                                   <field name="current_usr"/>
+                                   <field name="button_clicked"/>
+                               </group>
+                           </page>
+                       </notebook>
+                   </sheet>
+               </form>
+              </field>
+    </record>
+
+
+     <record id="view_time_check_in_calendar" model="ir.ui.view" >
+            <field name="name">check.time.calendar</field>
+            <field name="model">check.time</field>
+            <field name="arch" type="xml">
+                <calendar date_start="check_in" date_stop="check_out"
+                          string="Time check in, check out" color="employ_id" >
+                    <field name="employ_id" />
+                    <field name="check_in" />
+                    <field name="check_out" />
+                    <field name ="timekeeping"/>
+                </calendar>
+            </field>
+        </record>
+
+    <record id="action_employee_check_in" model="ir.actions.act_window">
+            <field name="name">Check Time</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">check.time</field>
+            <field name="view_mode">tree,calendar</field>
+            <field name="help" type="xml">
+                <p class="o_view_nocontent">
+                    view time check in, check out
+                </p>
+            </field>
+        </record>
+
+      <record id="action_repair" model="ir.actions.act_window">
+            <field name="name">Employee Repair</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">repair.repair</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="xml">
+                <p class="o_view_nocontent">
+                    view time check in, check out
+                </p>
+            </field>
+        </record>
+
+<!--    <record id="action_employee_expense" model="ir.actions.act_window">-->
+<!--            <field name="name">Timekeeping</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">check.time</field>-->
+<!--            <field name="view_mode">tree,calendar</field>-->
+<!--            <field name="help" type="xml">-->
+<!--                <p class="o_view_nocontent">-->
+<!--                    view time check in, check out-->
+<!--                </p>-->
+<!--            </field>-->
+<!--    </record>-->
+
+    <menuitem
+            id="menu_hr_employee"
+            name="Check in"
+            action="action_employee_check_in"
+            parent="hr.menu_hr_root"
+            sequence="5"/>
+    <menuitem
+            id="sub_menu_hr_employee"
+            name="Check in"
+            action="action_employee_check_in"
+            parent="menu_hr_employee"
+            sequence="5"/>
+    <menuitem
+            id="menu_expense"
+            name="Timekeeping"
+            action="action_employee_check_in"
+            parent="menu_hr_employee"
+            sequence="7"/>
+    <menuitem
+            id="menu_repair"
+            name="Repair"
+            action="action_repair"
+            parent="menu_hr_employee"
+            sequence="8"/>
+    <menuitem
+            id="menu_report"
+            name="Report"
+            action="depends_hr.rp_action"
+            parent="menu_hr_employee"
+            sequence="8"/>
+
+</odoo>
+
