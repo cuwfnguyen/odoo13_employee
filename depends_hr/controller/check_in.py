@@ -3,6 +3,7 @@ from odoo import http
 from odoo.http import request
 import json
 from datetime import datetime
+from datetime import timedelta
 
 class CheckIn(http.Controller):
     _name = 'check.in'
@@ -18,7 +19,7 @@ class CheckIn(http.Controller):
 
         request.env["time.check.in"].sudo().create({
             'employee_id': id,
-            'time_check_in': t
+            'time_check_in': t,
         })
 
         a = request.env["time.check.in"].sudo().search([])

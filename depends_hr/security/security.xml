@@ -40,6 +40,7 @@
         <field name="name">staff record rule</field>
         <field name="model_id" ref="model_hr_employee"/>
         <field name="domain_force">[('user_id', '=', user.id)]</field>
+<!--        <field name="domain_force">['|', ('user_id', '=', user.id), ('user_id.parent_id', '=', user.id)]</field>-->
         <field name="groups" eval="[(4, ref('user'))]"/>
     </record>
 

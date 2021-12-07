@@ -7,7 +7,7 @@
         <field name="model">report.trans</field>
         <field name="report_type">xlsx</field>
         <field name="report_name">depends_hr.report_monthly</field>
-        <field name="report_file">depends_hr.report_monthly</field>
+        <field name="report_file">bangcong</field>
         <field name="binding_type">report</field>
     </record>
 </odoo>

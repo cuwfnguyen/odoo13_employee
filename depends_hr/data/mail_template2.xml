@@ -3,7 +3,7 @@
 
        <record id="timekeeping_monthly" model="mail.template">
             <field name="name">Timekeeping template</field>
-            <field name="model_id" ref="model_check_time"/>
+            <field name="model_id" ref="model_hr_employee"/>
             <field name="subject"> Bang cong thang nay </field>
             <field name="email_from">${user.email_formatted | safe}</field>
             <field name="email_to">${object.work_email}</field>

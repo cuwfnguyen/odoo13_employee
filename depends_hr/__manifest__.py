@@ -19,20 +19,19 @@
     "external_dependencies": {"python": ["requests"]},
     "data": [
         'security/security.xml',
-        'security/rule_repair.xml',
         'security/ir.model.access.csv',
+        'security/rule_repair.xml',
         'data/cron.xml',
         'wizard/report.xml',
         'views/check_in.xml',
         'data/job_checkin.xml',
         'data/send_mail.xml',
         'data/mail_template.xml',
-        #'data/timekeeping_job.xml',
+        'data/timekeeping_job.xml',
         'wizard/report_xlsx.xml',
         'data/mail_template2.xml',
-
-
         ],
+
     'demo': [],
     'installable': True,
     'application': True,

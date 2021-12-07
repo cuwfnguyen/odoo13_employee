@@ -4,7 +4,7 @@
             <field name="name">report.form</field>
             <field name="model">report.trans</field>
             <field name="arch" type="xml">
-                <form string="crete report">
+                <form string="create report">
                     <footer>
                         <button name="create_xlsx_monthly" string="Report" type="object" class="btn-primary"/>
                         <button string="Cancel" class="btn-secondary" special="cancel"/>

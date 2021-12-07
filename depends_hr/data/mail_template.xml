@@ -11,8 +11,8 @@
                 <div style="margin: 0px; padding: 0px;">
                     <p style="margin: 0px; padding: 0px; font-size: 13px;">
                         Dear ${object.name}
-                        <br /><br />
-                        Chào bạn, đây là email nhắc nhở bạn đã quên chấm công vào ngày hôm nay, vui lòng làm
+                        <br/> <br/>
+                        Chào bạn, đây là email nhắc nhở bạn đã quên chấm công vào ngày ${object.t}, vui lòng làm
                         đơn để đủ thông tin chấm công!.
                          <br /><br />
                     </p>

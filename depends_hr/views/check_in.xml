@@ -19,7 +19,7 @@
               <field name="model">repair.repair</field>
               <field name="arch" type="xml">
                <tree>
-                   <field name="id_repair"/>
+                   <field name="repair"/>
                    <field name="status"/>
                </tree>
               </field>
@@ -33,14 +33,14 @@
                    <header>
                        <button name="cancel_repair" string="Cancel" type="object" class="btn-primary"/>
                        <button name="approval_repair" class="oe_highlight"
-                        string="Approve" type="object" groups="depends_hr.manager, depends_hr.super_manager, depends_hr.president"
-                        attrs="{'invisible': ['|',('button_clicked', '=', True),('current_usr', '=', True)]}"/>
+                        string="Approve" type="object" groups="depends_hr.manager"
+                        attrs="{'invisible': ['|', '|', '|', ('status', '=', 'cancel'), ('status', '=', 'confirm2'), '&amp;',('status', '=', 'draft'), ('current_usr', '!=', 'approve1'), '&amp;', ('status', '=', 'confirm1'), ('current_usr', '!=', 'approve2', )]}"/>
                    </header>
                    <sheet>
                        <notebook>
                            <page string="Information">
                                <group>
-                                   <field name="id_repair"/>
+                                   <field name="repair"/>
                                    <field name="date_repair"/>
                                    <field name="description" placeholder="Add an internal note..." height="50"/>
                                </group>
@@ -50,7 +50,6 @@
                                <group>
                                    <field name="status"/>
                                    <field name="current_usr"/>
-                                   <field name="button_clicked"/>
                                </group>
                            </page>
                        </notebook>
@@ -59,6 +58,18 @@
               </field>
     </record>
 
+    <record id="repair_view_search" model="ir.ui.view">
+            <field name="name">repair.search</field>
+            <field name="model">repair.repair</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="repair"/>
+                    <field name ="status"/>
+                    <separator/>
+                    <filter name="application" string="application approved" domain="['|', ('status','=','draft'), ('status','=','draft')]"/>
+                </search>
+             </field>
+     </record>
 
      <record id="view_time_check_in_calendar" model="ir.ui.view" >
             <field name="name">check.time.calendar</field>

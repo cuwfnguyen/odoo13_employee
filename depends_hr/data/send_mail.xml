@@ -10,6 +10,7 @@
             <field name="code">model.send_mail()</field>
             <field name="interval_number">24</field>
             <field name="interval_type">hours</field>
+<!--            <field name="nextcall" >2021-12-01 01:56:59</field>-->
             <field name="numbercall">-1</field>
 
         </record>

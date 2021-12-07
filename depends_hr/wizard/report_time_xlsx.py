@@ -5,7 +5,8 @@ class PartnerXlsx(models.AbstractModel):
     _name = 'report.depends_hr.report_monthly'
     _inherit = 'report.report_xlsx.abstract'
 
-    def generate_xlsx_report(self, workbook, partners):
+    def generate_xlsx_report(self, workbook, data, partners):
+
         res = self.env['check.time'].search([])
         sheet = workbook.add_worksheet('Timekeeping')
         bold = workbook.add_format({'bold': True})

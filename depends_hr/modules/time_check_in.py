@@ -17,12 +17,13 @@ class TimeKeeping(models.Model):
         for i in rec:
             b = i.time_check_in - timedelta(hours=12)
             a = i.time_check_in - timedelta(hours=1)
-            print(a, b)
-            print(i.time_check_in.date(), t.date())
+            # print(a, b)
+            # print(i.time_check_in.date(), t.date())
             if i.time_check_in.date() == t.date() and a.date() != b.date():
                 if i.employee_id in self.list_id:
-                    self.env["check.time"].sudo().search([('employ_id', '=', i.employee_id)]).write({
+                    self.env["check.time"].sudo().search([('employ_id', '=', i.employee_id), ('date_key', '=', t.date())]).write({
                         'check_out': i.time_check_in})
+                    print('check out')
 
                 else:
                     self.env["check.time"].sudo().create({
@@ -31,6 +32,7 @@ class TimeKeeping(models.Model):
                         'check_out': i.time_check_in,
                         'date_key': t.date()
                         })
+                    print('check in')
                 self.list_id.append(i.employee_id)
                 print(self.list_id)
 
